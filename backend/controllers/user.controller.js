@@ -26,7 +26,19 @@ const signUp  = asyncHandler( async(req,res)=>{
 // user login
 
 const signIn = asyncHandler(async(req, res)=>{
+    const {username, email, password} = req.body;
+    const user = await User.findOne({
+        $or: [{username}, {email}]
+    })
 
+    // generate token
+    
+    return res
+    .status(200)
+    .json({
+        success: true,
+        message: "user login successfully !!"
+    })
 })
 
 
