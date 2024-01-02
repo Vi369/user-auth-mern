@@ -1,4 +1,5 @@
 import bcrpt from 'bcrypt'
+import {User} from '../model/user.model.js'
 const signInValidator = async(req,res,next)=>{
     const {username, password} = req.body;
 
@@ -8,7 +9,7 @@ const signInValidator = async(req,res,next)=>{
             return res.status(400).json({ error: 'Username and password are required.' });
         }
         // find the user by 
-        const user = await userModel.findOne({ username });
+        const user = await User.findOne({ username });
     
         if(!user){
             return res.status(400).json({ error: 'User not exists' });
