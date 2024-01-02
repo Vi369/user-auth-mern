@@ -1,8 +1,8 @@
 import express from 'express'
-import { signUpValidator } from '../middlewares/signUp.middleware'
-import { signInValidator } from '../middlewares/signIn.middle'
-import { getUser, signIn, signUp } from '../controllers/user.controller'
-import { verifyJWT } from '../middlewares/auth.middle'
+import { signUpValidator } from '../middlewares/signUp.middleware.js'
+import { signInValidator } from '../middlewares/signIn.middle.js'
+import { getUser, signIn, signUp } from '../controllers/user.controller.js'
+import { verifyJWT } from '../middlewares/auth.middle.js'
 const router = express.Router()
 
 router.route("/register").post(signUpValidator, signUp)

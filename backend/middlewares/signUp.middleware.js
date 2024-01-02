@@ -1,5 +1,5 @@
 import emailValidator from 'email-validator'
-
+import { User } from '../model/user.model.js';
 
 const signUpValidator = async(req,res,next)=>{
     const {fullName,email,password,username} = req.body;
@@ -22,7 +22,7 @@ const signUpValidator = async(req,res,next)=>{
         })
        }
        // user already exit
-       const isUserAlreadyPresent = await userModel.findOne({ email });
+       const isUserAlreadyPresent = await User.findOne({ email });
         if (isUserAlreadyPresent) {
             return res.status(400).json({
                 success: false,
