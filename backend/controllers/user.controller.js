@@ -16,7 +16,7 @@ const signUp = async(req,res)=>{
 
 //sign in 
 const signIn = async(req,res)=>{
-    const {username,password} = req.body;
+    const {username} = req.body;
 
     const user = await User.findOne({username}).select('+email')
     

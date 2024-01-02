@@ -35,7 +35,7 @@ const registerUser = async(payload)=>{
 
         const userData = await res.json()
         console.log(userData);
-        window.location.href="http://localhost:5500/client/login.html"
+        window.location.href="http://localhost:5501/frontend/signIn.html"
     } catch (error) {
         console.log(error.message);
     }
