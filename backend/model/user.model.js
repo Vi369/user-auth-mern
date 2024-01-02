@@ -32,7 +32,6 @@ const userSchema = new mongoose.Schema({
     }
 }, {timestamps: true})
 
-
 userSchema.pre("save", async function(next){
     // check the password is modifeid or not
     if(!this.isModified('password')) return next()
