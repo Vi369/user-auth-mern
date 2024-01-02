@@ -29,16 +29,38 @@ const signIn = asyncHandler(async(req, res)=>{
     const {username, email, password} = req.body;
     const user = await User.findOne({
         $or: [{username}, {email}]
-    })
+    }).select("+password")
 
-    // generate token
-    
-    return res
-    .status(200)
-    .json({
-        success: true,
-        message: "user login successfully !!"
-    })
+    if(user && (user.username || user.email)){
+        const isPasswordCorrent = bcrypt.compare(password, user.password)
+        if(isPasswordCorrent){
+           const token =  await user.generateAuthToken()
+
+           res.cookie("token", token, {
+            maxAge: 24*60*60*1000,
+            httpOnly: true
+           })
+           return res
+           .status(200)
+           .json({
+            success: true,
+            data: user,
+            message: "user login successfully !!"
+           })
+        } else{
+           return res.status(404)
+            json({
+                success: false,
+                message: "incorrect password try again"
+            })
+        }
+    }else{
+       return res.status(404)
+       .json({
+        message: "no account associate with this username or email"
+       })
+    }
+
 })
 
 

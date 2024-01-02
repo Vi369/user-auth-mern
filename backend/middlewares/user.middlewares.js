@@ -21,4 +21,7 @@ const signInPageValidator = (req,res,next)=>{
 }
 
 
-// logout page validator
+export {
+    signUpPageValidator,
+    signInPageValidator
+}
