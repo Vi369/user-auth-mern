@@ -15,13 +15,33 @@ const signUp = async(req,res)=>{
 }
 
 //sign in 
-const signIn = ()=>{
+const signIn = async(req,res)=>{
     const {username,password} = req.body;
-    try {
-        
-    } catch (error) {
-        res.status(404).send({message:"No Account Found Associated with this username"})
+
+    const user = await User.findOne({username}).select('+email')
+    
+    // generate token and success respone
+
+    const token = await user.generateAccessToken()
+
+    if(!token){
+        res.status(500).json({
+            error: "While generating token error"
+        });
     }
+
+    const options = {
+        httpOnly: true,
+        maxAge: 12*60*60*1000 // 12 hours
+    }
+
+    return res
+    .status(200)
+    .cookie("token", token, options)
+    .json({
+        success: true,
+        message: 'User Login successful' 
+    })
 }
 //get User
 const getUser = async(req,res)=>{

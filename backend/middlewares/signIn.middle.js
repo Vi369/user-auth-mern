@@ -1,3 +1,4 @@
+import bcrpt from 'bcrypt'
 const signInValidator = async(req,res,next)=>{
     const {username, password} = req.body;
 
@@ -11,6 +12,11 @@ const signInValidator = async(req,res,next)=>{
     
         if(!user){
             return res.status(400).json({ error: 'User not exists' });
+        }
+        // check password
+        const isPasswordCorrect = await user.isPasswordCorrect(password)
+        if(!isPasswordCorrect){
+            return res.status(400).json({ error: 'password is not correct try again.' });
         }
         next()
     } catch (error) {
