@@ -24,7 +24,7 @@ formSubmit.addEventListener("click",(event)=>{
 })
 
 // function declaration
-
+ 
 const registerUser = async(payload)=>{
     try {
         const res = await fetch("http://localhost:8000/register",{
