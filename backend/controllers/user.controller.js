@@ -45,8 +45,10 @@ const signIn = async(req,res)=>{
 }
 //get User
 const getUser = async(req,res)=>{
+    const {username} = req.user;
    try {
      const userData = await User.findOne({username});
+     console.log(userData)
          res.status(200).send({
              message:"Success",
              data:userData

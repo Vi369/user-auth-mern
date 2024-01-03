@@ -31,5 +31,6 @@ const userLogin = async (payload) => {
     
   } catch (error) {
     console.log(error.message)
+    window.location.href = "http://localhost:5501/frontend/signIn.html"
   }
 }

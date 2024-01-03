@@ -7,7 +7,7 @@ const router = express.Router()
 
 router.route("/register").post(signUpValidator, signUp)
 router.route("/login").post(signInValidator, signIn)
-router.route("/").get(verifyJWT, getUser)
+router.route("/auth").get(verifyJWT, getUser)
 
 
 export default router
